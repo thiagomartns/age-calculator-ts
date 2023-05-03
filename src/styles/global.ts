@@ -14,16 +14,16 @@ export default createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw; */
+    height: 960px;
     background-color: ${Theme.colors.lightGrey};
 
     .app-content {
-      width: 700px;
-      height: 500px;
+      max-width: 840px;
+      width: 100%;
       background-color: #fff;
       border-radius: 24px 24px 200px 24px;
-      padding: 2rem;
+      padding: 2rem 2rem 4rem 2rem;
     }
   }
 
@@ -35,7 +35,7 @@ export default createGlobalStyle`
   }
 
   input {
-    width: 160px;
+    max-width: 160px;
     height: 72px;
     border-radius: 8px;
     border: none;
@@ -56,6 +56,16 @@ export default createGlobalStyle`
 
     &:focus::placeholder {
       color: white;
+    }
+  }
+
+  h1 {
+    font: ${Theme.typography.poppinsXB1};
+    color: ${Theme.colors.purple};
+    font-style: italic;
+
+    span {
+      color: ${Theme.colors.offBlack};
     }
   }
 `
