@@ -26,6 +26,7 @@ export const UserBirthdayContainer = styled.div`
       align-self: flex-end;
       position: relative;
       z-index: 1;
+      margin-right: 2rem;
 
       &:hover {
         background-color: ${Theme.colors.offBlack};
@@ -34,11 +35,11 @@ export const UserBirthdayContainer = styled.div`
     }
 
     .line {
-      width: 40%;
-      height: 1px;
-      background-color: #dcdcdc;
+      width: 50%;
+      height: 1.5px;
+      background-color: ${Theme.colors.lightGrey};
       position: absolute;
-      top: 45%;
+      top: 59%;
       z-index: 0;
     }
   }
