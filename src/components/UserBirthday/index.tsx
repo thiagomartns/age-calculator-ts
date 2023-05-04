@@ -60,7 +60,6 @@ const index: React.FC<AgeProps> = ({ handleSubmit, handleChangeDay, handleChange
         <button className="submit-btn btn" onClick={handleSubmit}>
           <img src={ButtonImg} alt="" />
         </button>
-        {/* <div className="line"></div> */}
       </form>
     </UserBirthdayContainer>
   )

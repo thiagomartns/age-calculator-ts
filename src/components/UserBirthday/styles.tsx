@@ -33,14 +33,5 @@ export const UserBirthdayContainer = styled.div`
         cursor: pointer;
       }
     }
-
-    .line {
-      width: 50%;
-      height: 1.5px;
-      background-color: ${Theme.colors.lightGrey};
-      position: absolute;
-      top: 59%;
-      z-index: 0;
-    }
   }
 `
