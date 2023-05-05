@@ -1,7 +1,7 @@
 import GlobalStyles from './styles/global';
 import UserBirthday from './components/UserBirthday/index';
 import AgeCalculator from './components/AgeCalculator/index';
-import { differenceInYears, differenceInCalendarMonths, differenceInCalendarDays } from 'date-fns';
+import { differenceInYears, differenceInCalendarMonths, differenceInCalendarDays, getDaysInMonth } from 'date-fns';
 import { useState } from "react";
 
 function App() {
@@ -15,17 +15,35 @@ function App() {
     e.preventDefault();
 
     const birthdate = new Date(year, month - 1, day);
+    
+    const birthMonth = birthdate.getMonth();
+    const birthDay = birthdate.getDate();
+    
     const today = new Date();
+
+    const hasPassedBirthday = (today.getMonth() > birthMonth) || 
+    (today.getMonth() === birthMonth && today.getDate() >= birthDay);
+
+    const lastBirthdayYear = hasPassedBirthday ? today.getFullYear() : today.getFullYear() - 1;
+    const lastBirthday = new Date(lastBirthdayYear, birthMonth, birthDay);
 
     const ageInYears = differenceInYears(today, birthdate);
 
     const ageInMonths = differenceInCalendarMonths(today, birthdate);
-    const months = ageInMonths % 12;
+    let months = ageInMonths % 12;
 
-    const ageInDays = differenceInCalendarDays(today, birthdate);
-    const days = ageInDays % 30;
+    const lastDayBirthday = new Date(today.getFullYear(), today.getMonth() - 1, day)
+    let ageInDays = differenceInCalendarDays(today, lastDayBirthday);
 
-    setAge({ years: ageInYears, months: months, days: days });
+    if (ageInDays === getDaysInMonth(today) - 1) {
+      ageInDays = 0
+    }
+
+    while (ageInDays > 30) {
+      ageInDays -= 30;
+    }
+
+    setAge({ years: ageInYears, months: months, days: ageInDays });
     
   }
 
