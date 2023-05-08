@@ -1,18 +1,16 @@
+import { AppContext } from "../../context/AgeContext"
 import { AgeCalculatorContainer } from "./styles"
+import { useContext } from 'react'
 
-interface BirthdayProps {
-  years: number,
-  months: number,
-  days: number
-}
+const index = () => {
 
-const index: React.FC<BirthdayProps> = ({ years, months, days }) => {
+  const { age } = useContext(AppContext)
 
   return (
     <AgeCalculatorContainer>
-      <h1>{years ? years : '--'} <span>years</span></h1>
-      <h1>{months ? months : '--'} <span>months</span></h1>
-      <h1>{days ? days : '--'} <span>days</span></h1>
+      <h1>{age.years ? age.years : '--'} <span>years</span></h1>
+      <h1>{age.months ? age.months : '--'} <span>months</span></h1>
+      <h1>{age.days ? age.days : '--'} <span>days</span></h1>
     </AgeCalculatorContainer>
   )
 }

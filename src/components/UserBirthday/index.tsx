@@ -1,14 +1,11 @@
 import { UserBirthdayContainer } from "./styles";
 import ButtonImg from '../../assets/img/icon-arrow.svg'
+import { useContext } from 'react';
+import { AppContext } from '../../context/AgeContext'
 
-interface AgeProps {
-  handleSubmit: (e: React.FormEvent<HTMLElement>) => void;
-  handleChangeDay: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+const index = () => {
 
-const index: React.FC<AgeProps> = ({ handleSubmit, handleChangeDay, handleChangeMonth, handleChangeYear }) => {
+  const { handleSubmit, handleChangeDay, handleChangeMonth, handleChangeYear } = useContext(AppContext)
 
   return (
     <UserBirthdayContainer>
