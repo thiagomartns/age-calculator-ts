@@ -8,54 +8,39 @@ interface AgeProps {
   handleChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-interface InputDetailProps {
-  placeholder: string;
-  type: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  label: string;
-  id: number;
-}
-
 const index: React.FC<AgeProps> = ({ handleSubmit, handleChangeDay, handleChangeMonth, handleChangeYear }) => {
-
-  const InputDetails: InputDetailProps[] = [
-    {
-      placeholder: 'dd',
-      type: 'number',
-      onChange: handleChangeDay,
-      label: 'day',
-      id: 1
-    },
-    {
-      placeholder: 'mm',
-      type: 'number',
-      onChange: handleChangeMonth,
-      label: 'month',
-      id: 2
-    },
-    {
-      placeholder: 'yyyy',
-      type: 'number',
-      onChange: handleChangeYear,
-      label: 'year',
-      id: 3
-    }
-  ]
 
   return (
     <UserBirthdayContainer>
       <form className="user-form" onSubmit={handleSubmit}>
         <div className="form-content">
-          {InputDetails.map((inputDetail, index) => (
-            <div className="input-container" key={index}>
-              <label>{inputDetail.label}</label>
-              <input 
-                placeholder={inputDetail.placeholder}
-                type={inputDetail.type}
-                onChange={inputDetail.onChange}
-              />
-            </div>
-          ))}
+          <div className="day input-container">
+            <label>day</label>
+            <input 
+              placeholder="dd" 
+              type="number" 
+              className="day-input"
+              onChange={handleChangeDay}
+            />
+          </div>
+          <div className="month input-container">
+            <label>month</label>
+            <input 
+              placeholder="mm" 
+              type="number" 
+              className="month-input" 
+              onChange={handleChangeMonth}
+            />
+          </div>
+          <div className="year input-container">
+            <label>year</label>
+            <input 
+              placeholder="yyyy" 
+              type="number" 
+              className="year-input" 
+              onChange={handleChangeYear}
+            />
+          </div>
         </div>
         <button className="submit-btn btn" onClick={handleSubmit}>
           <img src={ButtonImg} alt="" />
