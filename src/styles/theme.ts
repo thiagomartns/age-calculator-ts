@@ -9,6 +9,7 @@ const defaultTheme = {
     offBlack: 'hsl(0, 0%, 8%)',
   },
   typography: {
+    poppinsR1: '400 .875rem/21px "Poppins", sans-serif',
     poppinsB1: '700 .875rem/21px "Poppins", sans-serif',
     poppinsB2: '700 2rem/48px "Poppins", sans-serif',
     poppinsXB1: '800 6.5rem/100% "Poppins", sans-serif'
