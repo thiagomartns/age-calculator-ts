@@ -5,20 +5,29 @@ import { AppContext } from '../../context/AgeContext'
 
 const index = () => {
 
-  const { handleSubmit, handleChangeDay, handleChangeMonth, handleChangeYear, day, month, year, formSubmitted } = useContext(AppContext)
+  const { 
+    handleSubmit, 
+    handleChangeDay, 
+    handleChangeMonth, 
+    handleChangeYear, 
+    day, 
+    month, 
+    year, 
+    formSubmitted, 
+    isValidDay,
+    isValidMonth
+  } = useContext(AppContext)
 
   return (
     <UserBirthdayContainer>
       <form className="user-form" onSubmit={handleSubmit}>
         <div className="form-content">
-          <div 
-            className="input-container"
-          >
-            <label className={`${formSubmitted && day === 0 ? 'label-error' : ''}`}>day</label>
+          <div className="input-container">
+            <label className={`${formSubmitted && (day === 0 || !isValidDay) ? 'label-error' : ''}`}>day</label>
             <input 
               placeholder="dd" 
               type="number" 
-              className={`${formSubmitted && day === 0 ? 'input-error' : ''}`}
+              className={`${formSubmitted && (day === 0 || !isValidDay) ? 'input-error' : ''}`}
               onChange={handleChangeDay}
             />
             {formSubmitted && day === 0 &&
@@ -26,18 +35,28 @@ const index = () => {
                 <span className='span-error'>This field is required</span>
               </>
             }
+            {formSubmitted && !isValidDay &&
+              <>
+                <span className='span-error'>Must be a valid date</span>
+              </>
+            }
           </div>
           <div className="input-container">
-            <label className={`${formSubmitted && month === 0 ? 'label-error' : ''}`}>month</label>
+            <label className={`${formSubmitted && (month === 0 || !isValidMonth) ? 'label-error' : ''}`}>month</label>
             <input 
               placeholder="mm" 
               type="number" 
-              className={`${formSubmitted && month === 0 ? 'input-error' : ''}`}
+              className={`${formSubmitted && (month === 0 || !isValidMonth) ? 'input-error' : ''}`}
               onChange={handleChangeMonth}
             />
             {formSubmitted && month === 0 &&
               <>
                 <span className='span-error'>This field is required</span>
+              </>
+            }
+            {formSubmitted && !isValidMonth &&
+              <>
+                <span className='span-error'>Must be a valid month</span>
               </>
             }
           </div>

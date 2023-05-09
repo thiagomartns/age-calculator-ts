@@ -21,6 +21,8 @@ interface AppContextType {
   setYear: React.Dispatch<React.SetStateAction<number>>;
   setAge: React.Dispatch<React.SetStateAction<BirthdayProps>>;
   formSubmitted: boolean;
+  isValidDay: boolean;
+  isValidMonth: boolean
 }
 
 
@@ -41,7 +43,9 @@ export const AppContext = createContext<AppContextType>({
   setMonth: () => {},
   setYear: () => {},
   setAge: () => {},
-  formSubmitted: false
+  formSubmitted: false,
+  isValidDay: true,
+  isValidMonth: true
 });
 
 const AppProvider: React.FC<Props> = ({ children }) => {
@@ -50,6 +54,8 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   const [year, setYear] = useState<number>(0);
   const [age, setAge] = useState<{ years: number, months: number, days: number }>({ years: 0, months: 0, days: 0 });
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [isValidDay, setIsValidDay]  = useState<boolean>(true);
+  const [isValidMonth, setIsValidMonth]  = useState<boolean>(true);
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -95,20 +101,23 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   }
 
   const handleChangeDay = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim();
-    if (value === '') {
-      setDay(Number(0));
-    } else {
-      setDay(Number(value));
-    }
+    const dayValue = parseInt(e.target.value);
+    const isValid = /^[1-9]$|^[1-2][0-9]$|^3[0-1]$/.test(dayValue.toString());
+  
+    setIsValidDay(isValid);
+    setDay(dayValue);
   }
 
   const handleChangeMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonth(parseInt(e.target.value))
+    const monthValue = parseInt(e.target.value);
+    const isValid = /^(0[1-9]|1[0-2])$/.test(monthValue.toString());
+  
+    setIsValidMonth(isValid);
+    setMonth(monthValue);
   }
 
   const handleChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setYear(parseInt(e.target.value))
+    setYear(parseInt(e.target.value));
   }
 
   const contextValue = {
@@ -125,6 +134,8 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     handleChangeYear,
     setAge,
     formSubmitted,
+    isValidDay,
+    isValidMonth
   };
 
   return (
