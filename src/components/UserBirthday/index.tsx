@@ -5,38 +5,55 @@ import { AppContext } from '../../context/AgeContext'
 
 const index = () => {
 
-  const { handleSubmit, handleChangeDay, handleChangeMonth, handleChangeYear } = useContext(AppContext)
+  const { handleSubmit, handleChangeDay, handleChangeMonth, handleChangeYear, day, month, year, formSubmitted } = useContext(AppContext)
 
   return (
     <UserBirthdayContainer>
       <form className="user-form" onSubmit={handleSubmit}>
         <div className="form-content">
-          <div className="day input-container">
-            <label>day</label>
+          <div 
+            className="input-container"
+          >
+            <label className={`${formSubmitted && day === 0 ? 'label-error' : ''}`}>day</label>
             <input 
               placeholder="dd" 
               type="number" 
-              className="day-input"
+              className={`${formSubmitted && day === 0 ? 'input-error' : ''}`}
               onChange={handleChangeDay}
             />
+            {formSubmitted && day === 0 &&
+              <>
+                <span className='span-error'>This field is required</span>
+              </>
+            }
           </div>
-          <div className="month input-container">
-            <label>month</label>
+          <div className="input-container">
+            <label className={`${formSubmitted && month === 0 ? 'label-error' : ''}`}>month</label>
             <input 
               placeholder="mm" 
               type="number" 
-              className="month-input" 
+              className={`${formSubmitted && month === 0 ? 'input-error' : ''}`}
               onChange={handleChangeMonth}
             />
+            {formSubmitted && month === 0 &&
+              <>
+                <span className='span-error'>This field is required</span>
+              </>
+            }
           </div>
-          <div className="year input-container">
-            <label>year</label>
+          <div className="input-container">
+            <label className={`${formSubmitted && year === 0 ? 'label-error' : ''}`}>year</label>
             <input 
               placeholder="yyyy" 
               type="number" 
-              className="year-input" 
+              className={`${formSubmitted && year === 0 ? 'input-error' : ''}`}
               onChange={handleChangeYear}
             />
+            {formSubmitted && year === 0 &&
+              <>
+                <span className='span-error'>This field is required</span>
+              </>
+            }
           </div>
         </div>
         <button className="submit-btn btn" onClick={handleSubmit}>

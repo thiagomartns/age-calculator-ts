@@ -20,6 +20,7 @@ interface AppContextType {
   setMonth: React.Dispatch<React.SetStateAction<number>>;
   setYear: React.Dispatch<React.SetStateAction<number>>;
   setAge: React.Dispatch<React.SetStateAction<BirthdayProps>>;
+  formSubmitted: boolean;
 }
 
 
@@ -39,7 +40,8 @@ export const AppContext = createContext<AppContextType>({
   setDay: () => {},
   setMonth: () => {},
   setYear: () => {},
-  setAge: () => {}
+  setAge: () => {},
+  formSubmitted: false
 });
 
 const AppProvider: React.FC<Props> = ({ children }) => {
@@ -47,9 +49,17 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   const [month, setMonth] = useState<number>(0);
   const [year, setYear] = useState<number>(0);
   const [age, setAge] = useState<{ years: number, months: number, days: number }>({ years: 0, months: 0, days: 0 });
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
+
+    setFormSubmitted(true);
+
+    if (!day || !month || !year) {
+      setAge({ years: 0, months: 0, days: 0 });
+      return;
+    }
 
     const birthdate = new Date(year, month - 1, day);
     
@@ -85,7 +95,12 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   }
 
   const handleChangeDay = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDay(parseInt(e.target.value))
+    const value = e.target.value.trim();
+    if (value === '') {
+      setDay(Number(0));
+    } else {
+      setDay(Number(value));
+    }
   }
 
   const handleChangeMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,7 +123,8 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     handleChangeDay,
     handleChangeMonth,
     handleChangeYear,
-    setAge
+    setAge,
+    formSubmitted,
   };
 
   return (
