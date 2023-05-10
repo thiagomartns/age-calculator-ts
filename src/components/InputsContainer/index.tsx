@@ -24,21 +24,27 @@ const index = () => {
       placeholder: "dd",
       value: day,
       onChange: handleChangeDay,
-      isValid: isValidDay
+      isValid: isValidDay,
+      errorMessage: 'Must be a valid date',
+      emptyMessage: 'This field is required'
     },
     {
       label: "month",
       placeholder: "mm",
       value: month,
       onChange: handleChangeMonth,
-      isValid: isValidMonth
+      isValid: isValidMonth,
+      errorMessage: 'Must be a valid date',
+      emptyMessage: 'This field is required'
     },
     {
       label: "year",
       placeholder: "yyyy",
       value: year,
       onChange: handleChangeYear,
-      isValid: isValidYear
+      isValid: isValidYear,
+      errorMessage: 'Must be in the past',
+      emptyMessage: 'This field is required'
     }
   ];
 
@@ -54,10 +60,10 @@ const index = () => {
           onChange={field.onChange}
         />
         {formSubmitted && field.value === 0 &&
-          <span className='span-error'>This field is required</span>
+          <span className='span-error'>{field.emptyMessage}</span>
         }
         {formSubmitted && !field.isValid &&
-          <span className='span-error'>Must be a valid date</span>
+          <span className='span-error'>{field.errorMessage}</span>
         }
         </div>
       ))}
