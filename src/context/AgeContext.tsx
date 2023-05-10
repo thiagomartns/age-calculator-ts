@@ -22,7 +22,8 @@ interface AppContextType {
   setAge: React.Dispatch<React.SetStateAction<BirthdayProps>>;
   formSubmitted: boolean;
   isValidDay: boolean;
-  isValidMonth: boolean
+  isValidMonth: boolean;
+  isValidYear: boolean;
 }
 
 
@@ -45,7 +46,8 @@ export const AppContext = createContext<AppContextType>({
   setAge: () => {},
   formSubmitted: false,
   isValidDay: true,
-  isValidMonth: true
+  isValidMonth: true,
+  isValidYear: true
 });
 
 const AppProvider: React.FC<Props> = ({ children }) => {
@@ -56,6 +58,10 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [isValidDay, setIsValidDay]  = useState<boolean>(true);
   const [isValidMonth, setIsValidMonth]  = useState<boolean>(true);
+  const [isValidYear, setIsValidYear]  = useState<boolean>(true);
+
+  const birthdate = new Date(year, month - 1, day);
+  const today = new Date();
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -66,13 +72,9 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       setAge({ years: 0, months: 0, days: 0 });
       return;
     }
-
-    const birthdate = new Date(year, month - 1, day);
     
     const birthMonth = birthdate.getMonth();
     const birthDay = birthdate.getDate();
-    
-    const today = new Date();
 
     const hasPassedBirthday = (today.getMonth() > birthMonth) || 
     (today.getMonth() === birthMonth && today.getDate() >= birthDay);
@@ -97,6 +99,10 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     }
 
     setAge({ years: ageInYears, months: months, days: ageInDays });
+
+    if (!isValidDay || !isValidMonth || !isValidYear) {
+      setAge({ years: 0, months: 0, days: 0 });
+    }
     
   }
 
@@ -110,14 +116,18 @@ const AppProvider: React.FC<Props> = ({ children }) => {
 
   const handleChangeMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const monthValue = parseInt(e.target.value);
-    const isValid = /^(0[1-9]|1[0-2])$/.test(monthValue.toString());
+    const isValid = monthValue <= 12;
   
     setIsValidMonth(isValid);
     setMonth(monthValue);
   }
 
   const handleChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setYear(parseInt(e.target.value));
+    const yearValue = parseInt(e.target.value);
+    const isValid = yearValue <= today.getFullYear();
+  
+    setIsValidYear(isValid);
+    setYear(yearValue);
   }
 
   const contextValue = {
@@ -135,7 +145,8 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     setAge,
     formSubmitted,
     isValidDay,
-    isValidMonth
+    isValidMonth, 
+    isValidYear
   };
 
   return (

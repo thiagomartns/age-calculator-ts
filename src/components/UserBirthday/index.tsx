@@ -15,7 +15,8 @@ const index = () => {
     year, 
     formSubmitted, 
     isValidDay,
-    isValidMonth
+    isValidMonth,
+    isValidYear
   } = useContext(AppContext)
 
   return (
@@ -61,16 +62,21 @@ const index = () => {
             }
           </div>
           <div className="input-container">
-            <label className={`${formSubmitted && year === 0 ? 'label-error' : ''}`}>year</label>
+            <label className={`${formSubmitted && (year === 0 || !isValidYear) ? 'label-error' : ''}`}>year</label>
             <input 
               placeholder="yyyy" 
               type="number" 
-              className={`${formSubmitted && year === 0 ? 'input-error' : ''}`}
+              className={`${formSubmitted && (year === 0 || !isValidYear) ? 'input-error' : ''}`}
               onChange={handleChangeYear}
             />
             {formSubmitted && year === 0 &&
               <>
                 <span className='span-error'>This field is required</span>
+              </>
+            }
+            {formSubmitted && !isValidYear &&
+              <>
+                <span className='span-error'>Must be in the past</span>
               </>
             }
           </div>
