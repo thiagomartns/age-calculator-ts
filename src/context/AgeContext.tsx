@@ -60,7 +60,6 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   const [isValidMonth, setIsValidMonth]  = useState<boolean>(true);
   const [isValidYear, setIsValidYear]  = useState<boolean>(true);
 
-  const birthdate = new Date(year, month - 1, day);
   const today = new Date();
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
@@ -72,6 +71,9 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       setAge({ years: 0, months: 0, days: 0 });
       return;
     }
+
+    const birthdate = new Date(year, month - 1, day);
+    
     
     const birthMonth = birthdate.getMonth();
     const birthDay = birthdate.getDate();
@@ -88,12 +90,11 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     let months = ageInMonths % 12;
 
     const lastDayBirthday = new Date(today.getFullYear(), today.getMonth() - 1, day)
+    
     let ageInDays = differenceInCalendarDays(today, lastDayBirthday);
-
     if (ageInDays === getDaysInMonth(today) - 1) {
       ageInDays = 0
     }
-
     while (ageInDays > 30) {
       ageInDays -= 30;
     }

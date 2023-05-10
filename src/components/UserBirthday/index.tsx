@@ -16,7 +16,7 @@ const index = () => {
     formSubmitted, 
     isValidDay,
     isValidMonth,
-    isValidYear
+    isValidYear,
   } = useContext(AppContext)
 
   return (
