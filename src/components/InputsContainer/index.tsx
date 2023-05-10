@@ -53,6 +53,12 @@ const index = () => {
           className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'input-error' : ''}`}
           onChange={field.onChange}
         />
+        {formSubmitted && field.value === 0 &&
+          <span className='span-error'>This field is required</span>
+        }
+        {formSubmitted && !field.isValid &&
+          <span className='span-error'>Must be a valid date</span>
+        }
         </div>
       ))}
     </InputFieldContainer>
