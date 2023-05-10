@@ -1,22 +1,20 @@
 import { UserBirthdayContainer } from "./styles";
-import ButtonImg from '../../assets/img/icon-arrow.svg'
 import { useContext } from 'react';
 import { AppContext } from '../../context/AgeContext';
 import Inputs from '../InputsContainer/index';
+import SubmitBtn from "../SubmitButton/index";
 
 const index = () => {
 
   const { 
-    handleSubmit, 
+    handleSubmit
   } = useContext(AppContext)
 
   return (
     <UserBirthdayContainer>
       <form className="user-form" onSubmit={handleSubmit}>
         <Inputs />
-        <button className="submit-btn btn" onClick={handleSubmit}>
-          <img src={ButtonImg} alt="" />
-        </button>
+        <SubmitBtn />
       </form>
     </UserBirthdayContainer>
   )
