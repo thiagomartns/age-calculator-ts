@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { InputFieldContainer } from "./styles"
 import { AppContext } from "../../context/AgeContext"
-
+import Input from '../Input/index'
 
 const index = () => {
 
@@ -12,7 +12,6 @@ const index = () => {
     day, 
     month, 
     year, 
-    formSubmitted, 
     isValidDay,
     isValidMonth,
     isValidYear,
@@ -20,6 +19,7 @@ const index = () => {
 
   const fields = [
     {
+      id: 1,
       label: "day",
       placeholder: "dd",
       value: day,
@@ -29,6 +29,7 @@ const index = () => {
       emptyMessage: 'This field is required'
     },
     {
+      id: 2,
       label: "month",
       placeholder: "mm",
       value: month,
@@ -38,6 +39,7 @@ const index = () => {
       emptyMessage: 'This field is required'
     },
     {
+      id: 3,
       label: "year",
       placeholder: "yyyy",
       value: year,
@@ -51,21 +53,7 @@ const index = () => {
   return (
     <InputFieldContainer>
       {fields.map((field, index) => (
-        <div className="input-container" key={index}>
-          <label className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'label-error' : ''}`}>{field.label}</label>
-          <input 
-          placeholder={field.placeholder} 
-          type="number"
-          className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'input-error' : ''}`}
-          onChange={field.onChange}
-        />
-        {formSubmitted && field.value === 0 &&
-          <span className='span-error'>{field.emptyMessage}</span>
-        }
-        {formSubmitted && !field.isValid &&
-          <span className='span-error'>{field.errorMessage}</span>
-        }
-        </div>
+        <Input field={field} key={index} />
       ))}
     </InputFieldContainer>
   )
