@@ -18,65 +18,43 @@ const index = () => {
     isValidYear,
   } = useContext(AppContext);
 
+  const fields = [
+    {
+      label: "day",
+      placeholder: "dd",
+      value: day,
+      onChange: handleChangeDay,
+      isValid: isValidDay
+    },
+    {
+      label: "month",
+      placeholder: "mm",
+      value: month,
+      onChange: handleChangeMonth,
+      isValid: isValidMonth
+    },
+    {
+      label: "year",
+      placeholder: "yyyy",
+      value: year,
+      onChange: handleChangeYear,
+      isValid: isValidYear
+    }
+  ];
+
   return (
     <InputFieldContainer>
-      <div className="input-container">
-        <label className={`${formSubmitted && (day === 0 || !isValidDay) ? 'label-error' : ''}`}>day</label>
-        <input 
-          placeholder="dd" 
-          type="number" 
-          className={`${formSubmitted && (day === 0 || !isValidDay) ? 'input-error' : ''}`}
-          onChange={handleChangeDay}
+      {fields.map((field, index) => (
+        <div className="input-container" key={index}>
+          <label className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'label-error' : ''}`}>{field.label}</label>
+          <input 
+          placeholder={field.placeholder} 
+          type="number"
+          className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'input-error' : ''}`}
+          onChange={field.onChange}
         />
-        {formSubmitted && day === 0 &&
-          <>
-            <span className='span-error'>This field is required</span>
-          </>
-        }
-        {formSubmitted && !isValidDay &&
-          <>
-            <span className='span-error'>Must be a valid date</span>
-          </>
-        }
-      </div>
-      <div className="input-container">
-        <label className={`${formSubmitted && (month === 0 || !isValidMonth) ? 'label-error' : ''}`}>month</label>
-        <input 
-          placeholder="mm" 
-          type="number" 
-          className={`${formSubmitted && (month === 0 || !isValidMonth) ? 'input-error' : ''}`}
-          onChange={handleChangeMonth}
-        />
-        {formSubmitted && month === 0 &&
-          <>
-            <span className='span-error'>This field is required</span>
-          </>
-        }
-        {formSubmitted && !isValidMonth &&
-          <>
-            <span className='span-error'>Must be a valid month</span>
-          </>
-        }
-      </div>
-      <div className="input-container">
-        <label className={`${formSubmitted && (year === 0 || !isValidYear) ? 'label-error' : ''}`}>year</label>
-        <input 
-          placeholder="yyyy" 
-          type="number" 
-          className={`${formSubmitted && (year === 0 || !isValidYear) ? 'input-error' : ''}`}
-          onChange={handleChangeYear}
-        />
-        {formSubmitted && year === 0 &&
-          <>
-            <span className='span-error'>This field is required</span>
-          </>
-        }
-        {formSubmitted && !isValidYear &&
-          <>
-            <span className='span-error'>Must be in the past</span>
-          </>
-        }
-      </div>
+        </div>
+      ))}
     </InputFieldContainer>
   )
 }
