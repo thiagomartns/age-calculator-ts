@@ -12,36 +12,6 @@ export const UserBirthdayContainer = styled.div`
       gap: 3rem;
     }
 
-    .form-content {
-      display: flex;
-      gap: 2rem;
-
-      ${Media.mobile} {
-        gap: 1rem;
-        justify-content: center;
-      }
-
-      .input-container {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-
-        .label-error {
-          color: ${Theme.colors.lightRed};
-        }
-
-        .input-error {
-          border-color: ${Theme.colors.lightRed};
-        }
-
-        .span-error {
-          color: ${Theme.colors.lightRed};
-          font: ${Theme.typography.poppinsR1};
-          font-style: italic;
-        }
-      }
-    }
-
     .submit-btn {
       width: 96px;
       height: 96px;
