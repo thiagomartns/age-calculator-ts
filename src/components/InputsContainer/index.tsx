@@ -52,8 +52,8 @@ const index = () => {
 
   return (
     <InputFieldContainer>
-      {fields.map((field, index) => (
-        <Input field={field} key={index} />
+      {fields.map((field) => (
+        <Input field={field} key={field.id} />
       ))}
     </InputFieldContainer>
   )
