@@ -17,27 +17,31 @@ interface Props {
   field: FieldProps
 }
 
-const index: React.FC<Props> = ({ field }) => {
+const Input: React.FC<Props> = ({ field }) => {
 
   const { formSubmitted } = useContext(AppContext);
 
+  const { label, placeholder, value, onChange, isValid, errorMessage, emptyMessage } = field;
+
   return (
     <InputStyles>
-      <label className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'label-error' : ''}`}>{field.label}</label>
+      <label className={`${formSubmitted && (value === 0 || !isValid) ? 'label-error' : ''}`}>
+        {label}
+      </label>
       <input 
-        placeholder={field.placeholder} 
+        placeholder={placeholder} 
         type="number"
-        className={`${formSubmitted && (field.value === 0 || !field.isValid) ? 'input-error' : ''}`}
-        onChange={field.onChange}
+        className={`${formSubmitted && (value === 0 || !isValid) ? 'input-error' : ''}`}
+        onChange={onChange}
       />
-      {formSubmitted && field.value === 0 &&
-        <span className='span-error'>{field.emptyMessage}</span>
+      {formSubmitted && value === 0 &&
+        <span className='span-error'>{emptyMessage}</span>
       }
-      {formSubmitted && !field.isValid &&
-        <span className='span-error'>{field.errorMessage}</span>
+      {formSubmitted && !isValid &&
+        <span className='span-error'>{errorMessage}</span>
       }
     </InputStyles>
   )
 }
 
-export default index
+export default Input
