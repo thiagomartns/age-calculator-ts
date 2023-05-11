@@ -48,6 +48,10 @@ export default createGlobalStyle`
     color: ${Theme.colors.smokeyGrey};
     letter-spacing: .25rem;
 
+    &.label-error {
+      color: ${Theme.colors.lightRed};
+    }
+
     ${Media.mobile} {
       font: ${Theme.typography.poppinsB4};
     }
@@ -62,6 +66,10 @@ export default createGlobalStyle`
     padding-left: 1.25rem;
     font: ${Theme.typography.poppinsB2};
 
+    &.input-error {
+      border-color: ${Theme.colors.lightRed};
+    }
+
     ${Media.mobile} {
       max-width: 87.67px;
       height: 54px;
@@ -72,7 +80,7 @@ export default createGlobalStyle`
     &::placeholder {
       text-transform: uppercase;
       font: ${Theme.typography.poppinsB2};
-
+      
       ${Media.mobile} {
         font: ${Theme.typography.poppinsB3};
       }
@@ -105,6 +113,14 @@ export default createGlobalStyle`
 
     span {
       color: ${Theme.colors.offBlack};
+    }
+  }
+
+  span {
+    &.span-error {
+      color: ${Theme.colors.lightRed};
+      font: ${Theme.typography.poppinsR1};
+      font-style: italic;
     }
   }
 `
