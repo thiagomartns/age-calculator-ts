@@ -4,7 +4,7 @@ import { AppContext } from '../../context/AgeContext';
 import Inputs from '../InputsContainer/index';
 import SubmitBtn from "../SubmitButton/index";
 
-const index = () => {
+const UserBirthday = () => {
 
   const { 
     handleSubmit
@@ -20,4 +20,4 @@ const index = () => {
   )
 }
 
-export default index
+export default UserBirthday

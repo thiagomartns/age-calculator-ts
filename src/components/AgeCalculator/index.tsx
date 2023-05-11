@@ -2,7 +2,7 @@ import { AppContext } from "../../context/AgeContext"
 import { AgeCalculatorContainer } from "./styles"
 import { useContext } from 'react'
 
-const index = () => {
+const AgeCalculator = () => {
 
   const { age } = useContext(AppContext)
 
@@ -15,4 +15,4 @@ const index = () => {
   )
 }
 
-export default index
+export default AgeCalculator

@@ -3,7 +3,7 @@ import ButtonImg from '../../assets/img/icon-arrow.svg';
 import { useContext } from "react";
 import { AppContext } from "../../context/AgeContext";
 
-const index = () => {
+const SubmitButton = () => {
 
   const { handleSubmit } = useContext(AppContext);
 
@@ -14,4 +14,4 @@ const index = () => {
   )
 }
 
-export default index
+export default SubmitButton

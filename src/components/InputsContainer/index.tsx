@@ -3,7 +3,7 @@ import { InputFieldContainer } from "./styles"
 import { AppContext } from "../../context/AgeContext"
 import Input from '../Input/index'
 
-const index = () => {
+const InputsContainer = () => {
 
   const {
     handleChangeDay, 
@@ -59,4 +59,4 @@ const index = () => {
   )
 }
 
-export default index
+export default InputsContainer
