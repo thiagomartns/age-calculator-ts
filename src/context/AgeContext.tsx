@@ -109,7 +109,7 @@ const AppProvider: React.FC<Props> = ({ children }) => {
 
   const handleChangeDay = (e: React.ChangeEvent<HTMLInputElement>) => {
     const dayValue = parseInt(e.target.value);
-    const isValid = /^[1-9]$|^[1-2][0-9]$|^3[0-1]$/.test(dayValue.toString());
+    const isValid = dayValue > 0 && dayValue <= 31;
   
     setIsValidDay(isValid);
     setDay(dayValue);
