@@ -7,7 +7,7 @@ This project is hosted on GitHub and requires installation of dependencies to ru
 To clone the repository, open your terminal and run:
 
 ```
-git clone https://github.com//thiagomartns/age-calculator-ts.git
+git clone https://github.com/thiagomartns/age-calculator-ts.git
 ```
 
 Once the repository has been cloned, navigate into the directory:
